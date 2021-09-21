@@ -3,26 +3,17 @@ import bongoSound from './bongoSound';
 
 const DrumMachine = () => {
   const sounds = {
-    Q: 'BOOM!',
-    W: 'BAM!',
-    E: 'CONGA!',
-    A: 'BONGO!',
-    S: 'BIM!',
-    D: 'BOP!',
-    Z: 'BEEP!',
-    X: 'BANG!',
-    C: 'BAP!',
+    Q: 'Q!',
+    W: 'W!',
+    E: 'E!',
+    A: 'A!',
+    S: 'S!',
+    D: 'D!',
+    Z: 'Z!',
+    X: 'X!',
+    C: 'C!',
   };
-  const [drum, setDrumHit] = useState('');
-
-  const handleDrumHit = (drum) => {
-    if (sounds[drum]) {
-      setDrumHit(drum);
-      document.getElementById(`${drum}`).play();
-    } else {
-      return;
-    }
-  };
+  const [drum, setDrum] = useState('');
 
   // const handleKeyUp = (e) => {
   //   const id = e.code[e.code.length-1];
@@ -32,23 +23,32 @@ const DrumMachine = () => {
   //   }
   // };
 
-  useEffect(() => {
+  const playDrumSound = (drum) => { // handler for clicks and key presses
+    if (sounds[drum]) {
+      setDrum(drum);
+      document.getElementById(`${drum}`).play();
+    } else {
+      return;
+    }
+  };
+
+  useEffect(() => { // react useEffect registers handler above for key down
     document.addEventListener('keydown', (e) => {
       e.preventDefault();
-      handleDrumHit(e.key.toUpperCase());
+      playDrumSound(e.key.toUpperCase());
     });
-  });
+  }, []); // with empty array, side-effect runs only once after initial render
 
-  const buttons = Object.keys(sounds).map( (button) =>
+  const drums = Object.keys(sounds).map( (drum) =>
     <button
-      onClick= {(e) => handleDrumHit(e.target.value)}
-      key={`${button}`}
+      onClick= {(e) => playDrumSound(e.target.value)}
+      key={`${drum}`}
       className="drum-pad"
-      value={`${button}`}
-      id={`DRUM-${button}`}
+      value={`${drum}`}
+      id={`DRUM-${drum}`}
     >
-      {button}
-      <audio src={bongoSound} className="clip" id={`${button}`}/>
+      {drum}
+      <audio src={bongoSound} className="clip" id={`${drum}`}/>
     </button>);
 
   return (
@@ -60,7 +60,7 @@ const DrumMachine = () => {
       </div>
       <div id="display" className="display">{sounds[drum]?sounds[drum]:''}</div>
       <div className="button-container">
-        {buttons}
+        {drums}
       </div>
     </div>
   );
