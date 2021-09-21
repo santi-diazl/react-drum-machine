@@ -2,4 +2,4 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-![Screenshot](/image/sample.png "This is a sample image.")
+![react-bongos](https://github.com/santi-diazl/react-drum-machine/raw/main/react-bongos.png)
