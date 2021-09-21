@@ -18,11 +18,11 @@
         "react"
     ],
     "rules": {
-        "require-jsdoc": "off"
+        "require-jsdoc":"off"
     },
     "settings": {
         "react": {
-            "version": "detect"
+           "version":"detect" 
         }
     }
 }
