@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import bongoSound from './bongoSound';
+import {source} from '../data/bongoSound.json';
 
 const DrumMachine = () => {
   const sounds = {
@@ -39,16 +39,16 @@ const DrumMachine = () => {
     });
   }, []); // with empty array, side-effect runs only once after initial render
 
-  const drums = Object.keys(sounds).map( (drum) =>
+  const drums = Object.keys(sounds).map( (drum, i) =>
     <button
       onClick= {(e) => playDrumSound(e.target.value)}
-      key={`${drum}`}
+      key={`${i}`}
       className="drum-pad"
       value={`${drum}`}
       id={`DRUM-${drum}`}
     >
       {drum}
-      <audio src={bongoSound} className="clip" id={`${drum}`}/>
+      <audio src={source} className="clip" id={`${drum}`}/>
     </button>);
 
   return (
